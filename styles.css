@@ -1,0 +1,2388 @@
+/* =========================================================
+   VMB — OWNER EXPERIENCE
+   ATELIER NORTH
+   PREMIUM CINEMATIC SYSTEM
+   ========================================================= */
+
+
+/* =========================================================
+   01. RESET / BASE
+   ========================================================= */
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #080b0a;
+  color: #f3eee4;
+  font-family: "Manrope", Arial, sans-serif;
+}
+
+button {
+  font: inherit;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+
+/* =========================================================
+   02. GLOBAL GRAIN
+   ========================================================= */
+
+.grain {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  pointer-events: none;
+  opacity: 0.035;
+
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+
+/* =========================================================
+   03. TOP NAVIGATION
+   ========================================================= */
+
+.nav {
+  position: fixed;
+  z-index: 900;
+
+  top: 0;
+  left: 0;
+  right: 0;
+
+  height: 70px;
+  padding: 0 5vw;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+  font: 500 9px "DM Mono", monospace;
+  letter-spacing: 0.15em;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+}
+
+.brand-mark {
+  width: 27px;
+  height: 27px;
+
+  display: grid;
+  place-items: center;
+
+  border: 1px solid rgba(210, 185, 125, 0.8);
+  border-radius: 50%;
+
+  color: #d2b97d;
+}
+
+.nav-note {
+  opacity: 0.45;
+}
+
+.nav-note i {
+  margin: 0 9px;
+
+  font-style: normal;
+  color: #d2b97d;
+}
+
+
+/* =========================================================
+   04. SCENE SYSTEM
+   ========================================================= */
+
+.scene {
+  position: absolute;
+  inset: 0;
+
+  padding: 110px 7vw 75px;
+
+  opacity: 0;
+  visibility: hidden;
+
+  transform:
+    translate3d(3%, 0, 0)
+    scale(0.985);
+
+  transition:
+    opacity 0.65s ease,
+    transform 0.85s cubic-bezier(0.2, 0.8, 0.2, 1),
+    visibility 0.65s;
+
+  will-change: transform, opacity;
+}
+
+.scene.active {
+  opacity: 1;
+  visibility: visible;
+  transform: translate3d(0, 0, 0) scale(1);
+}
+
+.scene-bg {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  transform: translate3d(0, 0, 0) scale(1.02);
+
+  will-change: transform;
+}
+
+.scene-tint {
+  position: absolute;
+  inset: 0;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(4, 7, 6, 0.9) 0%,
+      rgba(4, 7, 6, 0.58) 48%,
+      rgba(4, 7, 6, 0.62) 100%
+    ),
+    linear-gradient(
+      0deg,
+      rgba(4, 7, 6, 0.84),
+      transparent 50%
+    );
+}
+
+
+/* =========================================================
+   05. PREMIUM CINEMATIC TRANSITION
+   ========================================================= */
+
+.cinematic-transition {
+  position: fixed;
+  inset: 0;
+
+  z-index: 800;
+
+  pointer-events: none;
+
+  overflow: hidden;
+
+  opacity: 0;
+  visibility: hidden;
+
+  transform: translate3d(0, 0, 0);
+
+  will-change: opacity;
+}
+
+
+/* Active transition */
+
+.cinematic-transition.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+
+/* ---------------------------------------------------------
+   Cinematic image layer
+   --------------------------------------------------------- */
+
+.cinematic-transition::before {
+  content: "";
+
+  position: absolute;
+  inset: -8%;
+
+  background:
+    linear-gradient(
+      118deg,
+      rgba(9, 17, 14, 0.05) 0%,
+      rgba(9, 17, 14, 0.22) 42%,
+      rgba(6, 12, 10, 0.62) 100%
+    );
+
+  transform: translate3d(-8%, 0, 0);
+
+  will-change: transform, opacity;
+}
+
+
+/* ---------------------------------------------------------
+   Dark architectural diagonal panel
+   --------------------------------------------------------- */
+
+.cinematic-transition .transition-panel-a {
+  position: absolute;
+
+  top: -15%;
+  left: -20%;
+
+  width: 72%;
+  height: 135%;
+
+  background:
+    linear-gradient(
+      115deg,
+      rgba(11, 24, 19, 0.88),
+      rgba(12, 28, 22, 0.66)
+    );
+
+  border-right: 1px solid rgba(211, 185, 125, 0.12);
+
+  transform:
+    translate3d(-115%, 0, 0)
+    skewX(-12deg);
+
+  will-change: transform;
+}
+
+
+/* ---------------------------------------------------------
+   Secondary architectural panel
+   --------------------------------------------------------- */
+
+.cinematic-transition .transition-panel-b {
+  position: absolute;
+
+  top: -15%;
+  right: -35%;
+
+  width: 65%;
+  height: 135%;
+
+  background:
+    linear-gradient(
+      115deg,
+      rgba(8, 18, 14, 0.22),
+      rgba(7, 14, 11, 0.76)
+    );
+
+  border-left: 1px solid rgba(211, 185, 125, 0.08);
+
+  transform:
+    translate3d(115%, 0, 0)
+    skewX(-12deg);
+
+  will-change: transform;
+}
+
+
+/* ---------------------------------------------------------
+   Thin architectural line
+   --------------------------------------------------------- */
+
+.cinematic-transition .transition-line-a {
+  position: absolute;
+
+  top: -20%;
+  left: 50%;
+
+  width: 1px;
+  height: 140%;
+
+  background:
+    linear-gradient(
+      to bottom,
+      transparent,
+      rgba(214, 188, 130, 0.2),
+      rgba(214, 188, 130, 0.65),
+      transparent
+    );
+
+  transform:
+    translate3d(-50vw, 0, 0)
+    rotate(22deg);
+
+  will-change: transform;
+}
+
+.cinematic-transition .transition-line-b {
+  position: absolute;
+
+  top: -20%;
+  left: 50%;
+
+  width: 1px;
+  height: 140%;
+
+  background:
+    linear-gradient(
+      to bottom,
+      transparent,
+      rgba(255, 255, 255, 0.05),
+      rgba(255, 255, 255, 0.2),
+      transparent
+    );
+
+  transform:
+    translate3d(50vw, 0, 0)
+    rotate(22deg);
+
+  will-change: transform;
+}
+
+
+/* ---------------------------------------------------------
+   Gold light blade
+   --------------------------------------------------------- */
+
+.cinematic-transition .transition-light {
+  position: absolute;
+
+  top: -35%;
+  left: 50%;
+
+  width: 2px;
+  height: 170%;
+
+  background:
+    linear-gradient(
+      to bottom,
+      transparent 0%,
+      rgba(214, 188, 130, 0.08) 20%,
+      rgba(214, 188, 130, 0.95) 50%,
+      rgba(214, 188, 130, 0.08) 80%,
+      transparent 100%
+    );
+
+  box-shadow:
+    0 0 18px rgba(214, 188, 130, 0.18),
+    0 0 45px rgba(214, 188, 130, 0.08);
+
+  transform:
+    translate3d(-65vw, 0, 0)
+    rotate(22deg);
+
+  will-change: transform;
+}
+
+
+/* ---------------------------------------------------------
+   Transition typography
+   --------------------------------------------------------- */
+
+.cinematic-transition .transition-word {
+  position: absolute;
+
+  left: 7vw;
+  bottom: 11vh;
+
+  opacity: 0;
+
+  transform:
+    translate3d(0, 16px, 0);
+
+  font:
+    500 clamp(28px, 4vw, 58px) / 1
+    "Playfair Display",
+    serif;
+
+  letter-spacing: -0.035em;
+
+  color: #f3eee4;
+
+  will-change: transform, opacity;
+}
+
+.cinematic-transition .transition-word small {
+  display: block;
+
+  margin-bottom: 13px;
+
+  font:
+    500 8px "DM Mono",
+    monospace;
+
+  letter-spacing: 0.17em;
+
+  color: #d2b97d;
+}
+
+
+/* ---------------------------------------------------------
+   Transition number
+   --------------------------------------------------------- */
+
+.cinematic-transition .transition-number {
+  position: absolute;
+
+  right: 7vw;
+  bottom: 11vh;
+
+  opacity: 0;
+
+  transform: translate3d(0, 12px, 0);
+
+  font:
+    500 9px "DM Mono",
+    monospace;
+
+  letter-spacing: 0.15em;
+
+  color: rgba(243, 238, 228, 0.55);
+
+  will-change: transform, opacity;
+}
+
+
+/* ---------------------------------------------------------
+   Transition animation
+   --------------------------------------------------------- */
+
+.cinematic-transition.active .transition-panel-a {
+  animation:
+    transitionPanelA 900ms cubic-bezier(0.16, 0.72, 0.18, 1)
+    forwards;
+}
+
+.cinematic-transition.active .transition-panel-b {
+  animation:
+    transitionPanelB 900ms cubic-bezier(0.16, 0.72, 0.18, 1)
+    forwards;
+}
+
+.cinematic-transition.active .transition-line-a {
+  animation:
+    transitionLineA 900ms cubic-bezier(0.16, 0.72, 0.18, 1)
+    forwards;
+}
+
+.cinematic-transition.active .transition-line-b {
+  animation:
+    transitionLineB 900ms cubic-bezier(0.16, 0.72, 0.18, 1)
+    forwards;
+}
+
+.cinematic-transition.active .transition-light {
+  animation:
+    transitionLight 900ms cubic-bezier(0.16, 0.72, 0.18, 1)
+    forwards;
+}
+
+.cinematic-transition.active .transition-word {
+  animation:
+    transitionWord 900ms cubic-bezier(0.16, 0.72, 0.18, 1)
+    150ms forwards;
+}
+
+.cinematic-transition.active .transition-number {
+  animation:
+    transitionNumber 900ms cubic-bezier(0.16, 0.72, 0.18, 1)
+    190ms forwards;
+}
+
+
+/* =========================================================
+   TRANSITION KEYFRAMES
+   ========================================================= */
+
+@keyframes transitionPanelA {
+  0% {
+    transform:
+      translate3d(-115%, 0, 0)
+      skewX(-12deg);
+  }
+
+  45% {
+    transform:
+      translate3d(-8%, 0, 0)
+      skewX(-12deg);
+  }
+
+  100% {
+    transform:
+      translate3d(115%, 0, 0)
+      skewX(-12deg);
+  }
+}
+
+@keyframes transitionPanelB {
+  0% {
+    transform:
+      translate3d(115%, 0, 0)
+      skewX(-12deg);
+  }
+
+  45% {
+    transform:
+      translate3d(8%, 0, 0)
+      skewX(-12deg);
+  }
+
+  100% {
+    transform:
+      translate3d(-115%, 0, 0)
+      skewX(-12deg);
+  }
+}
+
+@keyframes transitionLineA {
+  0% {
+    transform:
+      translate3d(-50vw, 0, 0)
+      rotate(22deg);
+  }
+
+  100% {
+    transform:
+      translate3d(55vw, 0, 0)
+      rotate(22deg);
+  }
+}
+
+@keyframes transitionLineB {
+  0% {
+    transform:
+      translate3d(50vw, 0, 0)
+      rotate(22deg);
+  }
+
+  100% {
+    transform:
+      translate3d(-55vw, 0, 0)
+      rotate(22deg);
+  }
+}
+
+@keyframes transitionLight {
+  0% {
+    transform:
+      translate3d(-65vw, 0, 0)
+      rotate(22deg);
+  }
+
+  100% {
+    transform:
+      translate3d(65vw, 0, 0)
+      rotate(22deg);
+  }
+}
+
+@keyframes transitionWord {
+  0% {
+    opacity: 0;
+    transform:
+      translate3d(0, 16px, 0);
+  }
+
+  35% {
+    opacity: 1;
+    transform:
+      translate3d(0, 0, 0);
+  }
+
+  72% {
+    opacity: 1;
+    transform:
+      translate3d(0, 0, 0);
+  }
+
+  100% {
+    opacity: 0;
+    transform:
+      translate3d(0, -8px, 0);
+  }
+}
+
+@keyframes transitionNumber {
+  0% {
+    opacity: 0;
+    transform:
+      translate3d(0, 12px, 0);
+  }
+
+  35% {
+    opacity: 1;
+    transform:
+      translate3d(0, 0, 0);
+  }
+
+  70% {
+    opacity: 1;
+    transform:
+      translate3d(0, 0, 0);
+  }
+
+  100% {
+    opacity: 0;
+    transform:
+      translate3d(0, -8px, 0);
+  }
+}
+
+
+/* =========================================================
+   06. HERO
+   ========================================================= */
+
+.hero-layout {
+  height: 100%;
+
+  position: relative;
+  z-index: 2;
+
+  display: flex;
+  align-items: flex-end;
+}
+
+.hero-copy {
+  max-width: 780px;
+  padding-bottom: 3vh;
+}
+
+.kicker {
+  margin-bottom: 22px;
+
+  font:
+    500 9px "DM Mono",
+    monospace;
+
+  letter-spacing: 0.17em;
+  color: #d0b87f;
+}
+
+.hero-copy h1,
+.copy h2,
+.final h2 {
+  margin: 0 0 27px;
+
+  font:
+    500 clamp(44px, 6vw, 88px) / 0.95
+    "Playfair Display",
+    serif;
+
+  letter-spacing: -0.045em;
+}
+
+.hero-copy h1 em,
+.copy h2 em,
+.final h2 em {
+  font-style: normal;
+  color: #d6bc82;
+}
+
+.hero-copy p,
+.copy > p,
+.final-wrap > p {
+  max-width: 610px;
+
+  margin: 0 0 29px;
+
+  font-size: 15px;
+  line-height: 1.8;
+
+  color: rgba(243, 238, 228, 0.7);
+}
+
+
+/* =========================================================
+   07. BUTTONS
+   ========================================================= */
+
+.next {
+  padding: 15px 19px;
+
+  border: 1px solid rgba(214, 188, 130, 0.65);
+
+  background: rgba(214, 188, 130, 0.08);
+
+  color: #f4eee3;
+
+  cursor: pointer;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.13em;
+
+  font:
+    500 9px "DM Mono",
+    monospace;
+
+  transition:
+    background 0.25s ease,
+    color 0.25s ease,
+    transform 0.25s ease;
+}
+
+.next:hover {
+  background: #d6bc82;
+  color: #10110e;
+  transform: translateY(-2px);
+}
+
+.next span {
+  margin-left: 18px;
+}
+
+
+/* =========================================================
+   08. HERO FOOTNOTE
+   ========================================================= */
+
+.hero-note {
+  position: absolute;
+
+  left: 0;
+  right: 0;
+  bottom: 3px;
+
+  display: flex;
+  justify-content: space-between;
+
+  font:
+    500 8px "DM Mono",
+    monospace;
+
+  letter-spacing: 0.14em;
+
+  color: rgba(243, 238, 228, 0.5);
+}
+
+.hero-note b {
+  color: #d2b97d;
+}
+
+
+/* =========================================================
+   09. MAIN CONTENT FRAME
+   ========================================================= */
+
+.frame {
+  height: 100%;
+
+  position: relative;
+  z-index: 2;
+
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 7vw;
+
+  align-items: center;
+}
+
+.copy {
+  max-width: 650px;
+}
+
+.copy h2 {
+  font-size: clamp(38px, 4.8vw, 68px);
+}
+
+
+/* =========================================================
+   10. STATEMENTS
+   ========================================================= */
+
+.statement {
+  max-width: 500px;
+
+  margin-top: 28px;
+  padding: 13px 0 13px 17px;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 7px;
+
+  border-left: 1px solid #d2b97d;
+}
+
+.statement span,
+.ai-card span {
+  font:
+    500 8px "DM Mono",
+    monospace;
+
+  letter-spacing: 0.14em;
+
+  color: #d2b97d;
+}
+
+.statement strong {
+  font:
+    500 13px/1.55
+    Manrope,
+    sans-serif;
+
+  color: #ddd7cb;
+}
+
+
+/* =========================================================
+   11. MICRO LISTS / FLOWS
+   ========================================================= */
+
+.micro-list,
+.flow,
+.journey {
+  display: flex;
+
+  gap: 8px;
+
+  flex-wrap: wrap;
+
+  margin-top: 25px;
+}
+
+.micro-list span,
+.flow span,
+.journey span {
+  padding: 8px 10px;
+
+  border: 1px solid rgba(255, 255, 255, 0.14);
+
+  font:
+    500 8px "DM Mono",
+    monospace;
+
+  letter-spacing: 0.1em;
+
+  color: #b4b0a7;
+}
+
+.flow {
+  align-items: center;
+}
+
+.flow b,
+.journey b {
+  color: #d2b97d;
+  font-weight: 400;
+}
+
+
+/* =========================================================
+   12. GLASS UI CARDS
+   ========================================================= */
+
+.ui-card {
+  width: min(510px, 100%);
+
+  justify-self: end;
+
+  padding: 25px;
+
+  background: rgba(9, 12, 11, 0.7);
+
+  border: 1px solid rgba(255, 255, 255, 0.17);
+
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+
+  box-shadow:
+    0 35px 100px rgba(0, 0, 0, 0.4);
+}
+
+.ui-head {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  font:
+    500 8px "DM Mono",
+    monospace;
+
+  letter-spacing: 0.13em;
+
+  color: rgba(243, 238, 228, 0.5);
+}
+
+.live,
+.ok {
+  color: #8faf8d;
+}
+
+.attention {
+  color: #c5a56c;
+}
+
+
+/* =========================================================
+   13. OWNER HOME
+   ========================================================= */
+
+.portfolio {
+  display: flex;
+
+  align-items: baseline;
+
+  gap: 9px;
+
+  margin: 28px 0 22px;
+}
+
+.portfolio strong {
+  font-size: 70px;
+  font-weight: 500;
+}
+
+.portfolio span {
+  font-size: 11px;
+  color: #777;
+}
+
+.metric-grid {
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 10px;
+}
+
+.metric-grid div {
+  padding-top: 12px;
+
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.metric-grid small,
+.property-mini small,
+.three small {
+  display: block;
+
+  font:
+    500 8px "DM Mono",
+    monospace;
+
+  color: #777;
+
+  letter-spacing: 0.08em;
+}
+
+.metric-grid b {
+  display: block;
+
+  margin: 7px 0 3px;
+
+  font-size: 22px;
+}
+
+.metric-grid em {
+  font:
+    400 8px "DM Mono",
+    monospace;
+
+  color: #777;
+
+  font-style: normal;
+}
+
+.rows {
+  margin-top: 22px;
+
+  border-top: 1px solid rgba(255, 255, 255, 0.09);
+}
+
+.rows div,
+.guest-row {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  padding: 13px 0;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+
+  font-size: 10px;
+}
+
+.rows span {
+  font-size: 9px;
+}
+
+
+/* =========================================================
+   14. PROPERTY
+   ========================================================= */
+
+.property-photo {
+  height: 180px;
+
+  margin: 18px 0;
+
+  overflow: hidden;
+}
+
+.property-photo img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+}
+
+.property-title {
+  display: flex;
+  flex-direction: column;
+
+  gap: 6px;
+}
+
+.property-title b {
+  font-size: 12px;
+}
+
+.property-title span {
+  font-size: 9px;
+  color: #777;
+}
+
+.property-mini {
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 8px;
+
+  margin-top: 20px;
+}
+
+.property-mini div {
+  padding-top: 10px;
+
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.property-mini b {
+  display: block;
+
+  margin-top: 7px;
+
+  font-size: 12px;
+}
+
+
+/* =========================================================
+   15. PERFORMANCE / ANALYTICS
+   ========================================================= */
+
+.big-stat {
+  display: flex;
+
+  align-items: baseline;
+
+  gap: 10px;
+
+  margin: 25px 0 13px;
+}
+
+.big-stat b {
+  font-size: 65px;
+  font-weight: 500;
+}
+
+.big-stat span {
+  font-size: 10px;
+  color: #777;
+}
+
+.chart {
+  height: 145px;
+
+  display: flex;
+
+  align-items: flex-end;
+
+  gap: 6px;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.chart i {
+  flex: 1;
+
+  background: #cdb37b;
+
+  opacity: 0.65;
+}
+
+.three {
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 10px;
+
+  margin-top: 18px;
+}
+
+.three b {
+  display: block;
+
+  margin-top: 6px;
+
+  font-size: 14px;
+}
+
+
+/* =========================================================
+   16. OPERATIONS
+   ========================================================= */
+
+.op-row {
+  display: grid;
+
+  grid-template-columns: 32px 1fr auto;
+
+  gap: 12px;
+
+  align-items: center;
+
+  padding: 17px 0;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.op-row > span {
+  font:
+    500 8px "DM Mono",
+    monospace;
+
+  color: #d2b97d;
+}
+
+.op-row b {
+  display: block;
+  font-size: 11px;
+}
+
+.op-row small {
+  display: block;
+
+  margin-top: 5px;
+
+  color: #777;
+
+  font-size: 9px;
+}
+
+.op-row em {
+  font-style: normal;
+  color: #d2b97d;
+}
+
+
+/* =========================================================
+   17. OWNER REQUESTS
+   ========================================================= */
+
+.request-ui h3 {
+  margin: 25px 0 8px;
+
+  font:
+    500 25px/1.2
+    "Playfair Display",
+    serif;
+}
+
+.request-ui > p {
+  font-size: 10px;
+  color: #777;
+}
+
+.timeline {
+  margin: 25px 0;
+
+  padding-left: 17px;
+
+  border-left: 1px solid rgba(255, 255, 255, 0.13);
+}
+
+.timeline span {
+  display: block;
+
+  position: relative;
+
+  padding: 8px 0;
+
+  font-size: 9px;
+
+  color: #555;
+}
+
+.timeline span::before {
+  content: "";
+
+  position: absolute;
+
+  left: -21px;
+  top: 12px;
+
+  width: 6px;
+  height: 6px;
+
+  border-radius: 50%;
+
+  background: #333;
+}
+
+.timeline .done {
+  color: #c7c4ba;
+}
+
+.timeline .done::before {
+  background: #8faf8d;
+}
+
+.timeline .current {
+  color: #ddd;
+}
+
+.timeline .current::before {
+  background: #d2b97d;
+}
+
+.request-note {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  padding-top: 13px;
+
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+
+  font:
+    500 8px "DM Mono",
+    monospace;
+
+  color: #777;
+}
+
+.request-note b {
+  color: #d2b97d;
+}
+
+
+/* =========================================================
+   18. GUEST EXPERIENCE
+   ========================================================= */
+
+.guest-hero {
+  height: 165px;
+
+  position: relative;
+
+  margin: 17px 0;
+
+  overflow: hidden;
+}
+
+.guest-hero img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+}
+
+.guest-hero span {
+  position: absolute;
+
+  left: 12px;
+  bottom: 12px;
+
+  padding: 7px 9px;
+
+  background: rgba(5, 7, 6, 0.7);
+
+  font:
+    500 8px "DM Mono",
+    monospace;
+
+  letter-spacing: 0.1em;
+}
+
+.guest-row span {
+  font-size: 9px;
+  color: #888;
+}
+
+
+/* =========================================================
+   19. CHAT / WHATSAPP
+   ========================================================= */
+
+.chat-head {
+  display: grid;
+
+  grid-template-columns: 34px 1fr 20px;
+
+  gap: 10px;
+
+  align-items: center;
+}
+
+.avatar {
+  width: 30px;
+  height: 30px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 50%;
+
+  border: 1px solid #d2b97d;
+
+  color: #d2b97d;
+}
+
+.chat-head b,
+.chat-head small {
+  display: block;
+}
+
+.chat-head small {
+  margin-top: 4px;
+
+  font-size: 8px;
+
+  color: #777;
+}
+
+.bubble {
+  max-width: 82%;
+
+  padding: 12px 13px;
+
+  margin-top: 17px;
+
+  background: #171d1a;
+
+  border: 1px solid rgba(255, 255, 255, 0.07);
+
+  font-size: 9px;
+
+  line-height: 1.55;
+
+  color: #c9c5ba;
+}
+
+.bubble.owner {
+  margin-left: auto;
+
+  background: #284b3b;
+}
+
+.chat-foot {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  margin-top: 17px;
+  padding-top: 13px;
+
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+
+  font:
+    500 8px "DM Mono",
+    monospace;
+
+  color: #777;
+}
+
+.chat-foot b {
+  color: #d2b97d;
+}
+
+
+/* =========================================================
+   20. AI / INTELLIGENCE
+   ========================================================= */
+
+.ai-card {
+  max-width: 510px;
+
+  margin-top: 28px;
+  padding: 12px 0 12px 16px;
+
+  border-left: 1px solid #d2b97d;
+}
+
+.ai-card strong {
+  display: block;
+
+  margin-top: 8px;
+
+  font-size: 12px;
+
+  line-height: 1.6;
+
+  font-weight: 500;
+}
+
+.signal {
+  display: grid;
+
+  grid-template-columns: 28px 1fr 20px;
+
+  gap: 10px;
+
+  align-items: center;
+
+  padding: 17px 0;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.signal > span {
+  font:
+    500 8px "DM Mono",
+    monospace;
+
+  color: #d2b97d;
+}
+
+.signal b {
+  display: block;
+
+  font-size: 11px;
+}
+
+.signal small {
+  display: block;
+
+  margin-top: 4px;
+
+  font-size: 9px;
+
+  color: #777;
+}
+
+.signal em {
+  font-style: normal;
+  color: #d2b97d;
+}
+
+
+/* =========================================================
+   21. FINAL ECOSYSTEM SCENE
+   ========================================================= */
+
+.final {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+}
+
+.final-wrap {
+  position: relative;
+  z-index: 2;
+
+  max-width: 1000px;
+}
+
+.final-wrap h2 {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.final-wrap > p {
+  margin: 0 auto 30px;
+}
+
+.ecosystem {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 17px;
+
+  margin: 28px 0;
+
+  font:
+    500 9px "DM Mono",
+    monospace;
+
+  letter-spacing: 0.15em;
+}
+
+.ecosystem i {
+  font-style: normal;
+  color: #d2b97d;
+}
+
+.line {
+  font:
+    500 8px "DM Mono",
+    monospace;
+
+  letter-spacing: 0.12em;
+
+  color: #777;
+}
+
+.signature {
+  margin: 30px 0 24px;
+
+  font:
+    500 8px "DM Mono",
+    monospace;
+
+  color: #777;
+
+  letter-spacing: 0.1em;
+}
+
+.signature b {
+  color: #d2b97d;
+}
+
+
+/* =========================================================
+   22. FOOTER NAVIGATION
+   ========================================================= */
+
+.footer {
+  position: absolute;
+
+  z-index: 10;
+
+  left: 7vw;
+  right: 7vw;
+  bottom: 26px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  font:
+    500 8px "DM Mono",
+    monospace;
+
+  letter-spacing: 0.14em;
+
+  color: rgba(243, 238, 228, 0.48);
+}
+
+.footer button {
+  border: 0;
+
+  background: none;
+
+  color: #d2b97d;
+
+  cursor: pointer;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.13em;
+
+  font:
+    500 8px "DM Mono",
+    monospace;
+}
+
+
+/* =========================================================
+   23. PROGRESS BAR
+   ========================================================= */
+
+.progress {
+  position: fixed;
+
+  z-index: 1100;
+
+  left: 0;
+  bottom: 0;
+
+  width: 100%;
+  height: 2px;
+
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.progress span {
+  display: block;
+
+  width: 10%;
+  height: 100%;
+
+  background: #d2b97d;
+
+  transition: width 0.6s ease;
+}
+
+
+/* =========================================================
+   24. GPU PERFORMANCE
+   ========================================================= */
+
+.scene,
+.scene-bg,
+.cinematic-transition,
+.cinematic-transition::before,
+.transition-panel-a,
+.transition-panel-b,
+.transition-line-a,
+.transition-line-b,
+.transition-light,
+.transition-word,
+.transition-number {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+
+  will-change: transform, opacity;
+}
+
+.scene,
+.cinematic-transition {
+  contain: layout style paint;
+}
+
+.transition-panel-a,
+.transition-panel-b,
+.transition-line-a,
+.transition-line-b,
+.transition-light,
+.transition-word,
+.transition-number {
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   25. MOBILE
+   ========================================================= */
+
+@media (max-width: 850px) {
+
+  .nav {
+    height: 62px;
+    padding: 0 20px;
+  }
+
+  .nav-note {
+    display: none;
+  }
+
+  .scene {
+    padding: 88px 22px 62px;
+  }
+
+  .frame {
+    grid-template-columns: 1fr;
+
+    gap: 18px;
+
+    align-content: center;
+  }
+
+  .hero-copy h1 {
+    font-size: 54px;
+  }
+
+  .hero-copy p {
+    font-size: 13px;
+  }
+
+  .copy h2,
+  .final h2 {
+    font-size: 39px;
+  }
+
+  .ui-card {
+    justify-self: stretch;
+
+    max-height: 45vh;
+
+    overflow: hidden;
+  }
+
+  .property-photo,
+  .guest-hero {
+    height: 120px;
+  }
+
+  .metric-grid {
+    gap: 6px;
+  }
+
+  .metric-grid b {
+    font-size: 18px;
+  }
+
+  .portfolio {
+    margin: 17px 0;
+  }
+
+  .portfolio strong {
+    font-size: 52px;
+  }
+
+  .chart {
+    height: 90px;
+  }
+
+  .hero-note {
+    font-size: 7px;
+  }
+
+  .footer {
+    left: 22px;
+    right: 22px;
+  }
+
+  .ecosystem {
+    gap: 8px;
+    font-size: 7px;
+  }
+
+  .line {
+    line-height: 2;
+  }
+
+  .scene-tint {
+    background:
+      linear-gradient(
+        90deg,
+        rgba(4, 7, 6, 0.93),
+        rgba(4, 7, 6, 0.64) 60%,
+        rgba(4, 7, 6, 0.72)
+      ),
+      linear-gradient(
+        0deg,
+        rgba(4, 7, 6, 0.9),
+        transparent 55%
+      );
+  }
+
+  .cinematic-transition .transition-word {
+    left: 22px;
+    bottom: 13vh;
+  }
+
+  .cinematic-transition .transition-number {
+    right: 22px;
+    bottom: 13vh;
+  }
+
+  .cinematic-transition .transition-panel-a {
+    width: 90%;
+  }
+
+  .cinematic-transition .transition-panel-b {
+    width: 80%;
+  }
+}
+
+
+/* =========================================================
+   26. REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .scene,
+  .cinematic-transition,
+  .cinematic-transition *,
+  .progress span,
+  .next {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+/* =========================================================
+   VMB — SIGNATURE CINEMATIC TRANSITION
+   MINIMAL / LUXURY / SMOOTH
+   ========================================================= */
+
+.vmb-transition {
+
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 99999;
+
+  pointer-events: none;
+
+  overflow: hidden;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  background:
+    rgba(4, 8, 6, 0);
+
+  opacity: 0;
+
+  visibility: hidden;
+
+  will-change:
+    opacity,
+    background;
+
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+
+/* =========================================================
+   ACTIVE
+   ========================================================= */
+
+.vmb-transition.active {
+
+  opacity: 1;
+
+  visibility: visible;
+
+  animation:
+    vmbTransitionBackground
+    1050ms
+    cubic-bezier(
+      .22,
+      .75,
+      .18,
+      1
+    )
+    forwards;
+}
+
+
+/* =========================================================
+   VMB LOGO
+   ========================================================= */
+
+.vmb-transition-logo {
+
+  position: relative;
+
+  z-index: 5;
+
+  display: block;
+
+  margin: 0;
+
+  color: #f3eee4;
+
+  font-family:
+    "Playfair Display",
+    Georgia,
+    serif;
+
+  font-size:
+    clamp(38px, 5vw, 68px);
+
+  font-weight: 500;
+
+  line-height: 1;
+
+  letter-spacing:
+    .16em;
+
+  text-indent:
+    .16em;
+
+  opacity: 0;
+
+  transform:
+    translate3d(0, 12px, 0)
+    scale(.96);
+
+  text-align: center;
+
+  will-change:
+    opacity,
+    transform,
+    letter-spacing;
+
+  -webkit-font-smoothing:
+    antialiased;
+
+  text-shadow:
+    0 0 30px
+    rgba(214, 188, 130, .07);
+}
+
+
+/* =========================================================
+   DIAGONAL CINEMATIC SWEEP
+   ========================================================= */
+
+.vmb-transition-sweep {
+
+  position: absolute;
+
+  z-index: 2;
+
+  top: -35%;
+
+  left: 50%;
+
+  width: 1px;
+
+  height: 170%;
+
+  opacity: 0;
+
+  background:
+    linear-gradient(
+      to bottom,
+      transparent 0%,
+      rgba(214,188,130,.04) 20%,
+      rgba(214,188,130,.30) 42%,
+      rgba(228,204,145,.92) 50%,
+      rgba(214,188,130,.30) 58%,
+      rgba(214,188,130,.04) 80%,
+      transparent 100%
+    );
+
+  box-shadow:
+    0 0 18px
+    rgba(214,188,130,.22),
+
+    0 0 55px
+    rgba(214,188,130,.07);
+
+  transform:
+    translate3d(-65vw,0,0)
+    rotate(20deg);
+
+  will-change:
+    transform,
+    opacity;
+}
+
+
+/* =========================================================
+   SOFT LIGHT TRAIL
+   ========================================================= */
+
+.vmb-transition-light {
+
+  position: absolute;
+
+  z-index: 1;
+
+  top: -20%;
+
+  left: 50%;
+
+  width: 90px;
+
+  height: 140%;
+
+  opacity: 0;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(214,188,130,.035),
+      transparent
+    );
+
+  filter:
+    blur(12px);
+
+  transform:
+    translate3d(-65vw,0,0)
+    rotate(20deg);
+
+  will-change:
+    transform,
+    opacity;
+}
+
+
+/* =========================================================
+   VMB ANIMATION
+   ========================================================= */
+
+.vmb-transition.active
+.vmb-transition-logo {
+
+  animation:
+    vmbLogo
+    1050ms
+    cubic-bezier(
+      .18,
+      .78,
+      .16,
+      1
+    )
+    forwards;
+}
+
+
+/* =========================================================
+   GOLD SWEEP
+   ========================================================= */
+
+.vmb-transition.active
+.vmb-transition-sweep {
+
+  animation:
+    vmbSweep
+    950ms
+    cubic-bezier(
+      .18,
+      .78,
+      .16,
+      1
+    )
+    forwards;
+}
+
+
+/* =========================================================
+   SOFT TRAIL
+   ========================================================= */
+
+.vmb-transition.active
+.vmb-transition-light {
+
+  animation:
+    vmbTrail
+    950ms
+    cubic-bezier(
+      .18,
+      .78,
+      .16,
+      1
+    )
+    forwards;
+}
+
+
+/* =========================================================
+   BACKGROUND MOTION
+   ========================================================= */
+
+@keyframes vmbTransitionBackground {
+
+  0% {
+
+    opacity: 0;
+
+    background:
+      rgba(4,8,6,0);
+  }
+
+  25% {
+
+    opacity: 1;
+
+    background:
+      rgba(4,8,6,.18);
+  }
+
+  52% {
+
+    opacity: 1;
+
+    background:
+      rgba(4,8,6,.32);
+  }
+
+  72% {
+
+    opacity: 1;
+
+    background:
+      rgba(4,8,6,.18);
+  }
+
+  100% {
+
+    opacity: 0;
+
+    background:
+      rgba(4,8,6,0);
+  }
+}
+
+
+/* =========================================================
+   VMB LOGO MOTION
+   ========================================================= */
+
+@keyframes vmbLogo {
+
+  0% {
+
+    opacity: 0;
+
+    transform:
+      translate3d(0,12px,0)
+      scale(.96);
+
+    letter-spacing:
+      .23em;
+  }
+
+
+  24% {
+
+    opacity: .55;
+
+    transform:
+      translate3d(0,3px,0)
+      scale(.985);
+
+    letter-spacing:
+      .18em;
+  }
+
+
+  42% {
+
+    opacity: 1;
+
+    transform:
+      translate3d(0,0,0)
+      scale(1);
+
+    letter-spacing:
+      .16em;
+  }
+
+
+  62% {
+
+    opacity: 1;
+
+    transform:
+      translate3d(0,0,0)
+      scale(1.015);
+
+    letter-spacing:
+      .165em;
+  }
+
+
+  82% {
+
+    opacity: .55;
+
+    transform:
+      translate3d(0,-2px,0)
+      scale(1.025);
+
+    letter-spacing:
+      .18em;
+  }
+
+
+  100% {
+
+    opacity: 0;
+
+    transform:
+      translate3d(0,-6px,0)
+      scale(1.04);
+
+    letter-spacing:
+      .21em;
+  }
+}
+
+
+/* =========================================================
+   DIAGONAL SWEEP MOTION
+   ========================================================= */
+
+@keyframes vmbSweep {
+
+  0% {
+
+    opacity: 0;
+
+    transform:
+      translate3d(-65vw,0,0)
+      rotate(20deg);
+  }
+
+
+  18% {
+
+    opacity: .35;
+  }
+
+
+  42% {
+
+    opacity: 1;
+
+    transform:
+      translate3d(-12vw,0,0)
+      rotate(20deg);
+  }
+
+
+  58% {
+
+    opacity: .85;
+
+    transform:
+      translate3d(10vw,0,0)
+      rotate(20deg);
+  }
+
+
+  82% {
+
+    opacity: .25;
+  }
+
+
+  100% {
+
+    opacity: 0;
+
+    transform:
+      translate3d(65vw,0,0)
+      rotate(20deg);
+  }
+}
+
+
+/* =========================================================
+   SOFT LIGHT TRAIL
+   ========================================================= */
+
+@keyframes vmbTrail {
+
+  0% {
+
+    opacity: 0;
+
+    transform:
+      translate3d(-65vw,0,0)
+      rotate(20deg);
+  }
+
+
+  30% {
+
+    opacity: .45;
+  }
+
+
+  55% {
+
+    opacity: .25;
+
+    transform:
+      translate3d(8vw,0,0)
+      rotate(20deg);
+  }
+
+
+  100% {
+
+    opacity: 0;
+
+    transform:
+      translate3d(65vw,0,0)
+      rotate(20deg);
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 850px) {
+
+  .vmb-transition-logo {
+
+    font-size: 44px;
+
+    letter-spacing:
+      .13em;
+
+    text-indent:
+      .13em;
+  }
+
+}
+
+
+/* =========================================================
+   PERFORMANCE
+   ========================================================= */
+
+.vmb-transition,
+.vmb-transition-logo,
+.vmb-transition-sweep,
+.vmb-transition-light {
+
+  -webkit-backface-visibility:
+    hidden;
+
+  backface-visibility:
+    hidden;
+
+  -webkit-transform-style:
+    preserve-3d;
+
+  transform-style:
+    preserve-3d;
+
+  will-change:
+    transform,
+    opacity;
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .vmb-transition,
+  .vmb-transition *,
+  .vmb-transition-logo,
+  .vmb-transition-sweep,
+  .vmb-transition-light {
+
+    animation:
+      none !important;
+
+    transition:
+      none !important;
+  }
+
+}
